@@ -49,6 +49,10 @@ public sealed class FakeObdLink : IObdLink
         [Pid.MaxMafRate] = [0x50, 0x00, 0x00, 0x00],      // 800.0 g/s
         [Pid.FuelInjectionTiming] = [0x69, 0x00],         // 0.0 deg
         [Pid.BarometricPressure] = [0x65],                 // 101 kPa
+        [Pid.CommandedEvapPurge] = [0x33],                 // 20.0 %
+        [Pid.EvapSystemVaporPressure] = [0xFE, 0x70],     // -100.0 Pa
+        [Pid.AbsoluteEvapSystemVaporPressure] = [0x4E, 0x20], // 100.0 kPa
+        [Pid.EvapSystemVaporPressureRaw] = [0xFE, 0x0C],  // -500.0 Pa
     };
 
     /// <summary>True if <paramref name="pid"/> has an explicit canned value (as opposed to

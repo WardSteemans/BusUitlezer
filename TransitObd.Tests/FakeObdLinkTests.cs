@@ -59,6 +59,10 @@ public class FakeObdLinkTests
     [InlineData(Pid.MaxMafRate, 80 * 10.0, "g/s")]                        // raw 0x50,0x00,0x00,0x00
     [InlineData(Pid.FuelInjectionTiming, 26880.0 / 128.0 - 210.0, "°")]  // raw 0x69,0x00
     [InlineData(Pid.BarometricPressure, 101.0, "kPa")]                    // raw 0x65
+    [InlineData(Pid.CommandedEvapPurge, 51 * 100.0 / 255.0, "%")]         // raw 0x33
+    [InlineData(Pid.EvapSystemVaporPressure, -400.0 / 4.0, "Pa")]         // raw 0xFE,0x70 (signed -400)
+    [InlineData(Pid.AbsoluteEvapSystemVaporPressure, 20000.0 / 200.0, "kPa")] // raw 0x4E,0x20
+    [InlineData(Pid.EvapSystemVaporPressureRaw, -500.0, "Pa")]            // raw 0xFE,0x0C (signed -500)
     public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
         Pid pid, double expectedValue, string? expectedUnit)
     {

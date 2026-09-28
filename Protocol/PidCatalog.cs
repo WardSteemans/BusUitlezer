@@ -29,7 +29,8 @@ public static class PidCatalog
             or Pid.ActualEngineTorque
             or Pid.FuelPressure
             or Pid.IntakeManifoldPressure
-            or Pid.BarometricPressure => 1,
+            or Pid.BarometricPressure
+            or Pid.CommandedEvapPurge => 1,
 
         Pid.EngineRpm
             or Pid.MafRate
@@ -43,7 +44,10 @@ public static class PidCatalog
             or Pid.FuelRailGaugePressure
             or Pid.FuelRailAbsolutePressure
             or Pid.CylinderFuelRate
-            or Pid.FuelInjectionTiming => 2,
+            or Pid.FuelInjectionTiming
+            or Pid.EvapSystemVaporPressure
+            or Pid.AbsoluteEvapSystemVaporPressure
+            or Pid.EvapSystemVaporPressureRaw => 2,
 
         Pid.FuelAirEquivalenceRatio
             or Pid.MaxMafRate => 4,

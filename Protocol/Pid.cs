@@ -93,4 +93,12 @@ public enum Pid : byte
     FuelInjectionTiming = 0x5D,
     /// <summary>Absolute barometric pressure (0-255 kPa).</summary>
     BarometricPressure = 0x33,
+    /// <summary>Commanded evaporative purge (0-100 %).</summary>
+    CommandedEvapPurge = 0x2E,
+    /// <summary>Evap. system vapor pressure, two's-complement signed (-8192 to 8191.75 Pa).</summary>
+    EvapSystemVaporPressure = 0x32,
+    /// <summary>Absolute evap system vapor pressure, unsigned (0-327.675 kPa).</summary>
+    AbsoluteEvapSystemVaporPressure = 0x53,
+    /// <summary>Evap system vapor pressure, raw two's-complement signed (-32768 to 32767 Pa).</summary>
+    EvapSystemVaporPressureRaw = 0x54,
 }

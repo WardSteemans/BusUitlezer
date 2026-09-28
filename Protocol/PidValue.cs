@@ -164,6 +164,26 @@ public sealed class PidValue
                     ? (((rawValue[0] << 8) | rawValue[1]) / 128.0 - 210.0, "°")
                     : (null, null);
 
+            case Pid.CommandedEvapPurge:
+                return rawValue.Count > 0
+                    ? (rawValue[0] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.EvapSystemVaporPressure:
+                return rawValue.Count >= 2
+                    ? ((short)((rawValue[0] << 8) | rawValue[1]) / 4.0, "Pa")
+                    : (null, null);
+
+            case Pid.AbsoluteEvapSystemVaporPressure:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 200.0, "kPa")
+                    : (null, null);
+
+            case Pid.EvapSystemVaporPressureRaw:
+                return rawValue.Count >= 2
+                    ? ((double)(short)((rawValue[0] << 8) | rawValue[1]), "Pa")
+                    : (null, null);
+
             default:
                 return (null, null);
         }
