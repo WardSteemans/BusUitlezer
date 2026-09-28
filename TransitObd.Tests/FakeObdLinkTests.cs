@@ -50,6 +50,15 @@ public class FakeObdLinkTests
     [InlineData(Pid.NoxReagentLevel, 204 * 100.0 / 255.0, "%")]           // raw byte offset 5 = 0xCC
     [InlineData(Pid.DieselExhaustFluidLevel, 153 * 100.0 / 255.0, "%")]   // raw byte offset 3 = 0x99
     [InlineData(Pid.DieselExhaustFluidDosing, 40.0 / 2.0, "%")]           // raw byte offset 1 = 0x28
+    [InlineData(Pid.FuelPressure, 100 * 3.0, "kPa")]                     // raw 0x64
+    [InlineData(Pid.IntakeManifoldPressure, 105.0, "kPa")]                // raw 0x69
+    [InlineData(Pid.FuelRailPressure, 10000 * 0.079, "kPa")]              // raw 0x27,0x10
+    [InlineData(Pid.FuelRailGaugePressure, 25000 * 10.0, "kPa")]          // raw 0x61,0xA8
+    [InlineData(Pid.FuelRailAbsolutePressure, 20000 * 10.0, "kPa")]       // raw 0x4E,0x20
+    [InlineData(Pid.CylinderFuelRate, 1600.0 / 32.0, "mg/stroke")]        // raw 0x06,0x40
+    [InlineData(Pid.MaxMafRate, 80 * 10.0, "g/s")]                        // raw 0x50,0x00,0x00,0x00
+    [InlineData(Pid.FuelInjectionTiming, 26880.0 / 128.0 - 210.0, "°")]  // raw 0x69,0x00
+    [InlineData(Pid.BarometricPressure, 101.0, "kPa")]                    // raw 0x65
     public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
         Pid pid, double expectedValue, string? expectedUnit)
     {

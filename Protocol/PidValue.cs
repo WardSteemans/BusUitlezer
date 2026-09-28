@@ -127,6 +127,43 @@ public sealed class PidValue
                     ? (rawValue[1] / 2.0, "%")
                     : (null, null);
 
+            case Pid.FuelPressure:
+                return rawValue.Count > 0
+                    ? (rawValue[0] * 3.0, "kPa")
+                    : (null, null);
+
+            case Pid.IntakeManifoldPressure:
+            case Pid.BarometricPressure:
+                return rawValue.Count > 0
+                    ? ((double)rawValue[0], "kPa")
+                    : (null, null);
+
+            case Pid.FuelRailPressure:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) * 0.079, "kPa")
+                    : (null, null);
+
+            case Pid.FuelRailGaugePressure:
+            case Pid.FuelRailAbsolutePressure:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) * 10.0, "kPa")
+                    : (null, null);
+
+            case Pid.CylinderFuelRate:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 32.0, "mg/stroke")
+                    : (null, null);
+
+            case Pid.MaxMafRate:
+                return rawValue.Count >= 4
+                    ? (rawValue[0] * 10.0, "g/s")
+                    : (null, null);
+
+            case Pid.FuelInjectionTiming:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 128.0 - 210.0, "°")
+                    : (null, null);
+
             default:
                 return (null, null);
         }

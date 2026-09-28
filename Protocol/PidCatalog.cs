@@ -26,7 +26,10 @@ public static class PidCatalog
             or Pid.EgrError
             or Pid.RelativeThrottlePosition
             or Pid.DriverDemandEngineTorque
-            or Pid.ActualEngineTorque => 1,
+            or Pid.ActualEngineTorque
+            or Pid.FuelPressure
+            or Pid.IntakeManifoldPressure
+            or Pid.BarometricPressure => 1,
 
         Pid.EngineRpm
             or Pid.MafRate
@@ -35,9 +38,15 @@ public static class PidCatalog
             or Pid.O2Bank1Sensor2Voltage
             or Pid.RuntimeWithMilOn
             or Pid.RuntimeSinceCodesCleared
-            or Pid.EngineFuelRate => 2,
+            or Pid.EngineFuelRate
+            or Pid.FuelRailPressure
+            or Pid.FuelRailGaugePressure
+            or Pid.FuelRailAbsolutePressure
+            or Pid.CylinderFuelRate
+            or Pid.FuelInjectionTiming => 2,
 
-        Pid.FuelAirEquivalenceRatio => 4,
+        Pid.FuelAirEquivalenceRatio
+            or Pid.MaxMafRate => 4,
 
         Pid.NoxReagentLevel => 10,
 

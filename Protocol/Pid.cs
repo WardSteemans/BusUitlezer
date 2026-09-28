@@ -73,4 +73,24 @@ public enum Pid : byte
     /// <summary>Commanded diesel exhaust fluid dosing rate (0-127.5 %), decoded from byte
     /// offset 1 of a 4-byte response; the other 3 bytes are undocumented.</summary>
     DieselExhaustFluidDosing = 0xA5,
+    /// <summary>Fuel pressure, gauge (0-765 kPa).</summary>
+    FuelPressure = 0x0A,
+    /// <summary>Intake manifold absolute pressure (0-255 kPa).</summary>
+    IntakeManifoldPressure = 0x0B,
+    /// <summary>Fuel rail pressure, relative to manifold vacuum (0-5177.265 kPa).</summary>
+    FuelRailPressure = 0x22,
+    /// <summary>Fuel rail gauge pressure — diesel or gasoline direct injection
+    /// (0-655,350 kPa).</summary>
+    FuelRailGaugePressure = 0x23,
+    /// <summary>Fuel rail absolute pressure (0-655,350 kPa).</summary>
+    FuelRailAbsolutePressure = 0x59,
+    /// <summary>Cylinder fuel rate (0-2047.96875 mg/stroke).</summary>
+    CylinderFuelRate = 0xA2,
+    /// <summary>Maximum value for air flow rate from mass air flow sensor (0-2550 g/s);
+    /// bytes B-D are reserved for future use and not decoded.</summary>
+    MaxMafRate = 0x50,
+    /// <summary>Fuel injection timing (-210.00 to +301.992 deg).</summary>
+    FuelInjectionTiming = 0x5D,
+    /// <summary>Absolute barometric pressure (0-255 kPa).</summary>
+    BarometricPressure = 0x33,
 }
