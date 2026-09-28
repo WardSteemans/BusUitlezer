@@ -53,6 +53,33 @@ public sealed class FakeObdLink : IObdLink
         [Pid.EvapSystemVaporPressure] = [0xFE, 0x70],     // -100.0 Pa
         [Pid.AbsoluteEvapSystemVaporPressure] = [0x4E, 0x20], // 100.0 kPa
         [Pid.EvapSystemVaporPressureRaw] = [0xFE, 0x0C],  // -500.0 Pa
+        [Pid.O2Sensor3Voltage] = [0x5A, 0x00],            // 0.450 V
+        [Pid.O2Sensor4Voltage] = [0x64, 0x00],            // 0.500 V
+        [Pid.O2Sensor5Voltage] = [0x6E, 0x00],            // 0.550 V
+        [Pid.O2Sensor6Voltage] = [0x78, 0x00],            // 0.600 V
+        [Pid.O2Sensor7Voltage] = [0x82, 0x00],            // 0.650 V
+        [Pid.O2Sensor8Voltage] = [0x8C, 0x00],            // 0.700 V
+        [Pid.O2Sensor1EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor2EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor3EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor4EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor5EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor6EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor7EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor8EquivalenceRatio] = [0x80, 0x00, 0x00, 0x00], // lambda 1.0
+        [Pid.O2Sensor1Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor2Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor3Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor4Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor5Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor6Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor7Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.O2Sensor8Current] = [0x80, 0x00, 0x80, 0x00], // 0.000 mA
+        [Pid.SecondaryO2TrimShortBank1] = [0x60, 0x00],   // -25.0 %
+        [Pid.SecondaryO2TrimLongBank1] = [0x60, 0x00],    // -25.0 %
+        [Pid.SecondaryO2TrimShortBank2] = [0x60, 0x00],   // -25.0 %
+        [Pid.SecondaryO2TrimLongBank2] = [0x60, 0x00],    // -25.0 %
+        [Pid.OxygenSensorsPresent4Banks] = [0x0F],         // 15.0 (raw bitmask)
     };
 
     /// <summary>True if <paramref name="pid"/> has an explicit canned value (as opposed to

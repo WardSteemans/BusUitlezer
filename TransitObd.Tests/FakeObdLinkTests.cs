@@ -63,6 +63,33 @@ public class FakeObdLinkTests
     [InlineData(Pid.EvapSystemVaporPressure, -400.0 / 4.0, "Pa")]         // raw 0xFE,0x70 (signed -400)
     [InlineData(Pid.AbsoluteEvapSystemVaporPressure, 20000.0 / 200.0, "kPa")] // raw 0x4E,0x20
     [InlineData(Pid.EvapSystemVaporPressureRaw, -500.0, "Pa")]            // raw 0xFE,0x0C (signed -500)
+    [InlineData(Pid.O2Sensor3Voltage, 90 * 0.005, "V")]                   // raw 0x5A,0x00
+    [InlineData(Pid.O2Sensor4Voltage, 100 * 0.005, "V")]                  // raw 0x64,0x00
+    [InlineData(Pid.O2Sensor5Voltage, 110 * 0.005, "V")]                  // raw 0x6E,0x00
+    [InlineData(Pid.O2Sensor6Voltage, 120 * 0.005, "V")]                  // raw 0x78,0x00
+    [InlineData(Pid.O2Sensor7Voltage, 130 * 0.005, "V")]                  // raw 0x82,0x00
+    [InlineData(Pid.O2Sensor8Voltage, 140 * 0.005, "V")]                  // raw 0x8C,0x00
+    [InlineData(Pid.O2Sensor1EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor2EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor3EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor4EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor5EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor6EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor7EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor8EquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.O2Sensor1Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor2Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor3Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor4Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor5Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor6Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor7Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.O2Sensor8Current, 32768.0 / 256.0 - 128.0, "mA")]     // raw 0x80,0x00,0x80,0x00
+    [InlineData(Pid.SecondaryO2TrimShortBank1, 96 * 100.0 / 128.0 - 100.0, "%")] // raw 0x60,0x00
+    [InlineData(Pid.SecondaryO2TrimLongBank1, 96 * 100.0 / 128.0 - 100.0, "%")]  // raw 0x60,0x00
+    [InlineData(Pid.SecondaryO2TrimShortBank2, 96 * 100.0 / 128.0 - 100.0, "%")] // raw 0x60,0x00
+    [InlineData(Pid.SecondaryO2TrimLongBank2, 96 * 100.0 / 128.0 - 100.0, "%")]  // raw 0x60,0x00
+    [InlineData(Pid.OxygenSensorsPresent4Banks, 15.0, null)]              // raw 0x0F
     public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
         Pid pid, double expectedValue, string? expectedUnit)
     {

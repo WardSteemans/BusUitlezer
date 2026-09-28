@@ -184,6 +184,53 @@ public sealed class PidValue
                     ? ((double)(short)((rawValue[0] << 8) | rawValue[1]), "Pa")
                     : (null, null);
 
+            case Pid.O2Sensor3Voltage:
+            case Pid.O2Sensor4Voltage:
+            case Pid.O2Sensor5Voltage:
+            case Pid.O2Sensor6Voltage:
+            case Pid.O2Sensor7Voltage:
+            case Pid.O2Sensor8Voltage:
+                return rawValue.Count >= 2
+                    ? (rawValue[0] * 0.005, "V")
+                    : (null, null);
+
+            case Pid.O2Sensor1EquivalenceRatio:
+            case Pid.O2Sensor2EquivalenceRatio:
+            case Pid.O2Sensor3EquivalenceRatio:
+            case Pid.O2Sensor4EquivalenceRatio:
+            case Pid.O2Sensor5EquivalenceRatio:
+            case Pid.O2Sensor6EquivalenceRatio:
+            case Pid.O2Sensor7EquivalenceRatio:
+            case Pid.O2Sensor8EquivalenceRatio:
+                return rawValue.Count >= 4
+                    ? (((rawValue[0] << 8) | rawValue[1]) * 2.0 / 65536.0, "λ")
+                    : (null, null);
+
+            case Pid.O2Sensor1Current:
+            case Pid.O2Sensor2Current:
+            case Pid.O2Sensor3Current:
+            case Pid.O2Sensor4Current:
+            case Pid.O2Sensor5Current:
+            case Pid.O2Sensor6Current:
+            case Pid.O2Sensor7Current:
+            case Pid.O2Sensor8Current:
+                return rawValue.Count >= 4
+                    ? (((rawValue[2] << 8) | rawValue[3]) / 256.0 - 128.0, "mA")
+                    : (null, null);
+
+            case Pid.SecondaryO2TrimShortBank1:
+            case Pid.SecondaryO2TrimLongBank1:
+            case Pid.SecondaryO2TrimShortBank2:
+            case Pid.SecondaryO2TrimLongBank2:
+                return rawValue.Count >= 2
+                    ? (rawValue[0] * 100.0 / 128.0 - 100.0, "%")
+                    : (null, null);
+
+            case Pid.OxygenSensorsPresent4Banks:
+                return rawValue.Count > 0
+                    ? ((double)rawValue[0], null)
+                    : (null, null);
+
             default:
                 return (null, null);
         }

@@ -101,4 +101,78 @@ public enum Pid : byte
     AbsoluteEvapSystemVaporPressure = 0x53,
     /// <summary>Evap system vapor pressure, raw two's-complement signed (-32768 to 32767 Pa).</summary>
     EvapSystemVaporPressureRaw = 0x54,
+    /// <summary>O2 sensor 3 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor3Voltage = 0x16,
+    /// <summary>O2 sensor 4 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor4Voltage = 0x17,
+    /// <summary>O2 sensor 5 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor5Voltage = 0x18,
+    /// <summary>O2 sensor 6 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor6Voltage = 0x19,
+    /// <summary>O2 sensor 7 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor7Voltage = 0x1A,
+    /// <summary>O2 sensor 8 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor8Voltage = 0x1B,
+    /// <summary>O2 sensor 1 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor1EquivalenceRatio = 0x24,
+    /// <summary>O2 sensor 2 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor2EquivalenceRatio = 0x25,
+    /// <summary>O2 sensor 3 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor3EquivalenceRatio = 0x26,
+    /// <summary>O2 sensor 4 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor4EquivalenceRatio = 0x27,
+    /// <summary>O2 sensor 5 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor5EquivalenceRatio = 0x28,
+    /// <summary>O2 sensor 6 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor6EquivalenceRatio = 0x29,
+    /// <summary>O2 sensor 7 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor7EquivalenceRatio = 0x2A,
+    /// <summary>O2 sensor 8 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor8EquivalenceRatio = 0x2B,
+    /// <summary>O2 sensor 1 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor1Current = 0x34,
+    /// <summary>O2 sensor 2 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor2Current = 0x35,
+    /// <summary>O2 sensor 3 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor3Current = 0x36,
+    /// <summary>O2 sensor 4 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor4Current = 0x37,
+    /// <summary>O2 sensor 5 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor5Current = 0x38,
+    /// <summary>O2 sensor 6 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor6Current = 0x39,
+    /// <summary>O2 sensor 7 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor7Current = 0x3A,
+    /// <summary>O2 sensor 8 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor8Current = 0x3B,
+    /// <summary>Short term secondary O2 sensor trim, bank 1 (-100 to 99.2 %); bank 3 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimShortBank1 = 0x55,
+    /// <summary>Long term secondary O2 sensor trim, bank 1 (-100 to 99.2 %); bank 3 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimLongBank1 = 0x56,
+    /// <summary>Short term secondary O2 sensor trim, bank 2 (-100 to 99.2 %); bank 4 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimShortBank2 = 0x57,
+    /// <summary>Long term secondary O2 sensor trim, bank 2 (-100 to 99.2 %); bank 4 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimLongBank2 = 0x58,
+    /// <summary>Oxygen sensors present, 4-bank layout (bitmask, no linear formula documented).</summary>
+    OxygenSensorsPresent4Banks = 0x1D,
 }
