@@ -261,6 +261,33 @@ public sealed class PidValue
                     ? (rawValue[0] - 125.0, "%")
                     : (null, null);
 
+            case Pid.RuntimeSinceEngineStart:
+                return rawValue.Count >= 2
+                    ? ((double)((rawValue[0] << 8) | rawValue[1]), "s")
+                    : (null, null);
+
+            case Pid.DistanceWithMilOn:
+            case Pid.DistanceSinceCodesCleared:
+                return rawValue.Count >= 2
+                    ? ((double)((rawValue[0] << 8) | rawValue[1]), "km")
+                    : (null, null);
+
+            case Pid.WarmUpsSinceCodesCleared:
+            case Pid.AuxiliaryInputStatus:
+                return rawValue.Count > 0
+                    ? ((double)rawValue[0], null)
+                    : (null, null);
+
+            case Pid.Odometer:
+                return rawValue.Count >= 4
+                    ? ((((uint)rawValue[0] << 24) | ((uint)rawValue[1] << 16) | ((uint)rawValue[2] << 8) | rawValue[3]) / 10.0, "km")
+                    : (null, null);
+
+            case Pid.TransmissionActualGear:
+                return rawValue.Count >= 4
+                    ? (((rawValue[2] << 8) | rawValue[3]) / 1000.0, "ratio")
+                    : (null, null);
+
             default:
                 return (null, null);
         }

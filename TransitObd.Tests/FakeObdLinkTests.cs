@@ -104,6 +104,13 @@ public class FakeObdLinkTests
     [InlineData(Pid.HybridBatteryPackRemainingLife, 153 * 100.0 / 255.0, "%")] // raw 0x99
     [InlineData(Pid.EngineReferenceTorque, 350.0, "N·m")]                 // raw 0x01,0x5E
     [InlineData(Pid.EngineFrictionPercentTorque, 120.0 - 125.0, "%")]     // raw 0x78
+    [InlineData(Pid.RuntimeSinceEngineStart, 600.0, "s")]                 // raw 0x02,0x58
+    [InlineData(Pid.DistanceWithMilOn, 45.0, "km")]                       // raw 0x00,0x2D
+    [InlineData(Pid.DistanceSinceCodesCleared, 320.0, "km")]              // raw 0x01,0x40
+    [InlineData(Pid.WarmUpsSinceCodesCleared, 5.0, null)]                 // raw 0x05
+    [InlineData(Pid.Odometer, 1000000.0 / 10.0, "km")]                    // raw 0x00,0x0F,0x42,0x40
+    [InlineData(Pid.TransmissionActualGear, 3200.0 / 1000.0, "ratio")]    // raw 0x02,0x00,0x0C,0x80
+    [InlineData(Pid.AuxiliaryInputStatus, 1.0, null)]                     // raw 0x01
     public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
         Pid pid, double expectedValue, string? expectedUnit)
     {

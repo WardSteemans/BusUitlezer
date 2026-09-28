@@ -94,6 +94,13 @@ public sealed class FakeObdLink : IObdLink
         [Pid.HybridBatteryPackRemainingLife] = [0x99],     // 60.0 %
         [Pid.EngineReferenceTorque] = [0x01, 0x5E],       // 350.0 N·m
         [Pid.EngineFrictionPercentTorque] = [0x78],        // -5.0 %
+        [Pid.RuntimeSinceEngineStart] = [0x02, 0x58],     // 600 s
+        [Pid.DistanceWithMilOn] = [0x00, 0x2D],           // 45 km
+        [Pid.DistanceSinceCodesCleared] = [0x01, 0x40],   // 320 km
+        [Pid.WarmUpsSinceCodesCleared] = [0x05],           // 5.0
+        [Pid.Odometer] = [0x00, 0x0F, 0x42, 0x40],        // 100000.0 km
+        [Pid.TransmissionActualGear] = [0x02, 0x00, 0x0C, 0x80], // 3.200 ratio
+        [Pid.AuxiliaryInputStatus] = [0x01],               // 1.0
     };
 
     /// <summary>True if <paramref name="pid"/> has an explicit canned value (as opposed to

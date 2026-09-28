@@ -40,7 +40,9 @@ public static class PidCatalog
             or Pid.AcceleratorPedalPositionF
             or Pid.CommandedThrottleActuator
             or Pid.HybridBatteryPackRemainingLife
-            or Pid.EngineFrictionPercentTorque => 1,
+            or Pid.EngineFrictionPercentTorque
+            or Pid.WarmUpsSinceCodesCleared
+            or Pid.AuxiliaryInputStatus => 1,
 
         Pid.EngineRpm
             or Pid.MafRate
@@ -72,7 +74,10 @@ public static class PidCatalog
             or Pid.CatalystTempBank2Sensor1
             or Pid.CatalystTempBank1Sensor2
             or Pid.CatalystTempBank2Sensor2
-            or Pid.EngineReferenceTorque => 2,
+            or Pid.EngineReferenceTorque
+            or Pid.RuntimeSinceEngineStart
+            or Pid.DistanceWithMilOn
+            or Pid.DistanceSinceCodesCleared => 2,
 
         Pid.FuelAirEquivalenceRatio
             or Pid.MaxMafRate
@@ -91,7 +96,9 @@ public static class PidCatalog
             or Pid.O2Sensor5Current
             or Pid.O2Sensor6Current
             or Pid.O2Sensor7Current
-            or Pid.O2Sensor8Current => 4,
+            or Pid.O2Sensor8Current
+            or Pid.Odometer
+            or Pid.TransmissionActualGear => 4,
 
         Pid.NoxReagentLevel => 10,
 

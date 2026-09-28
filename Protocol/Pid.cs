@@ -206,4 +206,20 @@ public enum Pid : byte
     EngineReferenceTorque = 0x63,
     /// <summary>Engine friction - percent torque (-125 to +130 %).</summary>
     EngineFrictionPercentTorque = 0x8E,
+    /// <summary>Run time since engine start (0-65,535 s).</summary>
+    RuntimeSinceEngineStart = 0x1F,
+    /// <summary>Distance traveled with MIL on (0-65,535 km).</summary>
+    DistanceWithMilOn = 0x21,
+    /// <summary>Distance traveled since diagnostic trouble codes were cleared (0-65,535 km).</summary>
+    DistanceSinceCodesCleared = 0x31,
+    /// <summary>Number of warm-ups since diagnostic trouble codes were cleared (0-255).</summary>
+    WarmUpsSinceCodesCleared = 0x30,
+    /// <summary>Odometer, CARB-mandated starting model year 2019 (0-429,496,729.5 km).</summary>
+    Odometer = 0xA6,
+    /// <summary>Transmission actual gear ratio, decoded from byte offset 2-3 (0-65.535 ratio);
+    /// bytes A (partial support-bit) and B are undocumented and not decoded.</summary>
+    TransmissionActualGear = 0xA4,
+    /// <summary>Auxiliary input status — bit 0 is Power Take Off (PTO) status, raw byte
+    /// passthrough (no linear formula documented).</summary>
+    AuxiliaryInputStatus = 0x1E,
 }
