@@ -22,7 +22,7 @@ validation; a wrong write can brick a module.
 
 ### M1 — Emulator + J1979 protocol layer (hardware-independent)
 
-**Status: current priority.**
+**Status: done.**
 
 Build the standard OBD-II (SAE J1979 / EOBD) read layer — DTC decoding, live PID parsing,
 VIN read — plus a fake ECU link so the whole thing is testable without an adapter or the
@@ -32,25 +32,48 @@ Why first: this is the only layer we can build with full confidence right now, s
 a standard and needs no Transit-specific data. It also gives M2 something solid to plug real
 hardware into, instead of debugging protocol logic and hardware quirks at the same time.
 
+### M1.5 — Full J1979 PID coverage
+
+**Status: done.**
+
+Extend the emulator/protocol layer beyond the initial M1 PID subset to the wider SAE J1979 /
+ISO 15031-5 Mode 01 PID set, prioritizing PIDs relevant to a 2.0L EcoBlue diesel. Same rigor as
+M1: formulas verified against a public standard reference, full `FakeObdLink` canned-value
+coverage, full test coverage. No fabricated Transit-specific data.
+
+### M1.9 — Pre-hardware readiness
+
+**Status: current priority.** Everything that can still be built, tested, or researched without
+the physical adapter or the van, front-loaded before M2 needs hardware to make further progress.
+Two kinds of work, tracked together under the `M1.9` label (see
+[issues #19, #20, #25-#32](https://github.com/WardSteemans/BusUitlezer/issues?q=label%3AM1.9)):
+
+- **Software.** Extra J1979 protocol coverage and hardening that doesn't need a vehicle: the
+  `SerialAtObdLink` adapter implementation and its `Program.cs` wiring (#19, #20 — filed under
+  M2 since they're the first links in that validation chain, but explicitly buildable and
+  testable now), Mode 02 freeze frame data, the remaining Mode 09 vehicle-info PIDs, a Mode 01
+  "supported PIDs" bitmask decoder, and a coverage-guard hardening pass so a future PID addition
+  can't silently fall through `PidCatalog`/`PidValue`'s fallback cases.
+- **Research (formerly planned as a separate M3).** Gather real, validated data for anything
+  beyond standard J1979: CAN IDs for modules other than the engine ECU (BCM equivalent, IPC,
+  etc.), as-built block layouts, and which UDS diagnostic session/security-access level each
+  read needs — from community sources (FORScan/forum documentation for this Transit generation)
+  or from the user's own bus captures, plus deciding how those captures will be taken. No
+  fabricated data, ever — every finding must cite its source. This research produces the inputs
+  M4 needs; it does not touch the vehicle.
+
 ### M2 — Hardware validation
 
 Once the OBD-II adapter and the van are both available: confirm the real adapter's AT-command
 behavior, baud rate, and timing against what M1 assumed; fix whatever doesn't match. Confirm
 J1979 PID/DTC reads work end-to-end against the real ECU.
 
-### M3 — Transit-specific data research
-
-Gather real, validated data for anything beyond standard J1979: CAN IDs for modules other than
-the engine ECU (BCM equivalent, IPC, etc.), and as-built block layouts — from community sources
-(FORScan/forum documentation for this Transit generation) or from the user's own bus captures.
-No fabricated data. This milestone produces the inputs M4 needs; it does not touch the vehicle.
-
 ### M4 — UDS + module-specific reads
 
-Only once M3 has real validated data: extend the protocol layer with UDS (ISO 14229) reads for
-non-engine modules, following faraday's `protocol::uds` as a reference implementation (this part
-IS safely reusable — UDS service framing is a standard, only the DIDs/addresses are vehicle
-data).
+Only once M1.9's research has real validated data: extend the protocol layer with UDS (ISO 14229)
+reads for non-engine modules, following faraday's `protocol::uds` as a reference implementation
+(this part IS safely reusable — UDS service framing is a standard, only the DIDs/addresses are
+vehicle data).
 
 ### M5 — As-built writes (later, high-risk)
 
