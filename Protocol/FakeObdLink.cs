@@ -32,7 +32,7 @@ public sealed class FakeObdLink : IObdLink
         [Pid.AmbientAirTemp] = [0x3A],                    // 18 degC
         [Pid.RuntimeWithMilOn] = [0x00, 0x0C],           // 12 min
         [Pid.RuntimeSinceCodesCleared] = [0x01, 0x54],   // 340 min
-        [Pid.RelativeThrottlePosition] = [0x0D],          // ~5.1 %
+        [Pid.RelativeAcceleratorPedalPosition] = [0x0D],  // ~5.1 %
         [Pid.EngineOilTemp] = [0x87],                     // 95 degC
         [Pid.EngineFuelRate] = [0x00, 0x40],             // 3.2 L/h
         [Pid.DriverDemandEngineTorque] = [0x73],          // -10 %

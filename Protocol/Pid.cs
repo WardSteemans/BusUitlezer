@@ -54,8 +54,11 @@ public enum Pid : byte
     RuntimeWithMilOn = 0x4D,
     /// <summary>Time since diagnostic trouble codes were cleared (minutes).</summary>
     RuntimeSinceCodesCleared = 0x4E,
-    /// <summary>Relative throttle position (0-100 %).</summary>
-    RelativeThrottlePosition = 0x5A,
+    /// <summary>Relative accelerator pedal position (0-100 %) — what the driver is
+    /// requesting, as distinct from <see cref="ThrottlePositionRelative"/> (0x45), the actual
+    /// throttle plate angle; these diverge under cruise control, traction control, or ECU
+    /// torque intervention.</summary>
+    RelativeAcceleratorPedalPosition = 0x5A,
     /// <summary>Engine oil temperature (-40 to +215 degC).</summary>
     EngineOilTemp = 0x5C,
     /// <summary>Engine fuel rate (0-3276.75 L/h).</summary>
@@ -183,9 +186,8 @@ public enum Pid : byte
     CatalystTempBank1Sensor2 = 0x3E,
     /// <summary>Catalyst temperature, bank 2, sensor 2 (-40 to 6513.5 degC).</summary>
     CatalystTempBank2Sensor2 = 0x3F,
-    /// <summary>Relative throttle position (0-100 %). The genuine PID for this name; distinct
-    /// from the existing, currently mislabeled <see cref="RelativeThrottlePosition"/>
-    /// (0x5A), which actually returns relative accelerator pedal position.</summary>
+    /// <summary>Relative throttle position (0-100 %) — the actual throttle plate angle, as
+    /// distinct from <see cref="RelativeAcceleratorPedalPosition"/> (0x5A).</summary>
     ThrottlePositionRelative = 0x45,
     /// <summary>Absolute throttle position B (0-100 %).</summary>
     AbsoluteThrottlePositionB = 0x47,

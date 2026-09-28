@@ -24,7 +24,7 @@ public static class PidCatalog
             or Pid.OxygenSensorsPresent
             or Pid.EgrCommanded
             or Pid.EgrError
-            or Pid.RelativeThrottlePosition
+            or Pid.RelativeAcceleratorPedalPosition
             or Pid.DriverDemandEngineTorque
             or Pid.ActualEngineTorque
             or Pid.FuelPressure

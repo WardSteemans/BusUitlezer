@@ -42,7 +42,7 @@ public class FakeObdLinkTests
     [InlineData(Pid.AmbientAirTemp, 58.0 - 40.0, "°C")]                   // raw 0x3A
     [InlineData(Pid.RuntimeWithMilOn, 12.0, "min")]                       // raw 0x00,0x0C
     [InlineData(Pid.RuntimeSinceCodesCleared, 340.0, "min")]              // raw 0x01,0x54
-    [InlineData(Pid.RelativeThrottlePosition, 13 * 100.0 / 255.0, "%")]   // raw 0x0D
+    [InlineData(Pid.RelativeAcceleratorPedalPosition, 13 * 100.0 / 255.0, "%")] // raw 0x0D
     [InlineData(Pid.EngineOilTemp, 135.0 - 40.0, "°C")]                   // raw 0x87
     [InlineData(Pid.EngineFuelRate, 64.0 * 0.05, "L/h")]                  // raw 0x00,0x40
     [InlineData(Pid.DriverDemandEngineTorque, 115.0 - 125.0, "%")]        // raw 0x73

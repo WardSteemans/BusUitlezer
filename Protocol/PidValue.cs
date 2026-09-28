@@ -63,7 +63,7 @@ public sealed class PidValue
                     : (null, null);
 
             case Pid.ThrottlePosition:
-            case Pid.RelativeThrottlePosition:
+            case Pid.RelativeAcceleratorPedalPosition:
             case Pid.EgrCommanded:
                 return rawValue.Count > 0
                     ? (rawValue[0] * 100.0 / 255.0, "%")
