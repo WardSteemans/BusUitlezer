@@ -24,9 +24,25 @@ public static class PidCatalog
             or Pid.OxygenSensorsPresent
             or Pid.EgrCommanded
             or Pid.EgrError
-            or Pid.RelativeThrottlePosition
+            or Pid.RelativeAcceleratorPedalPosition
             or Pid.DriverDemandEngineTorque
-            or Pid.ActualEngineTorque => 1,
+            or Pid.ActualEngineTorque
+            or Pid.FuelPressure
+            or Pid.IntakeManifoldPressure
+            or Pid.BarometricPressure
+            or Pid.CommandedEvapPurge
+            or Pid.OxygenSensorsPresent4Banks
+            or Pid.ThrottlePositionRelative
+            or Pid.AbsoluteThrottlePositionB
+            or Pid.AbsoluteThrottlePositionC
+            or Pid.AcceleratorPedalPositionD
+            or Pid.AcceleratorPedalPositionE
+            or Pid.AcceleratorPedalPositionF
+            or Pid.CommandedThrottleActuator
+            or Pid.HybridBatteryPackRemainingLife
+            or Pid.EngineFrictionPercentTorque
+            or Pid.WarmUpsSinceCodesCleared
+            or Pid.AuxiliaryInputStatus => 1,
 
         Pid.EngineRpm
             or Pid.MafRate
@@ -35,9 +51,59 @@ public static class PidCatalog
             or Pid.O2Bank1Sensor2Voltage
             or Pid.RuntimeWithMilOn
             or Pid.RuntimeSinceCodesCleared
-            or Pid.EngineFuelRate => 2,
+            or Pid.EngineFuelRate
+            or Pid.FuelRailPressure
+            or Pid.FuelRailGaugePressure
+            or Pid.FuelRailAbsolutePressure
+            or Pid.CylinderFuelRate
+            or Pid.FuelInjectionTiming
+            or Pid.EvapSystemVaporPressure
+            or Pid.AbsoluteEvapSystemVaporPressure
+            or Pid.EvapSystemVaporPressureRaw
+            or Pid.O2Sensor3Voltage
+            or Pid.O2Sensor4Voltage
+            or Pid.O2Sensor5Voltage
+            or Pid.O2Sensor6Voltage
+            or Pid.O2Sensor7Voltage
+            or Pid.O2Sensor8Voltage
+            or Pid.SecondaryO2TrimShortBank1
+            or Pid.SecondaryO2TrimLongBank1
+            or Pid.SecondaryO2TrimShortBank2
+            or Pid.SecondaryO2TrimLongBank2
+            or Pid.CatalystTempBank1Sensor1
+            or Pid.CatalystTempBank2Sensor1
+            or Pid.CatalystTempBank1Sensor2
+            or Pid.CatalystTempBank2Sensor2
+            or Pid.EngineReferenceTorque
+            or Pid.RuntimeSinceEngineStart
+            or Pid.DistanceWithMilOn
+            or Pid.DistanceSinceCodesCleared => 2,
 
-        Pid.FuelAirEquivalenceRatio => 4,
+        Pid.FuelAirEquivalenceRatio
+            or Pid.MaxMafRate
+            or Pid.O2Sensor1EquivalenceRatio
+            or Pid.O2Sensor2EquivalenceRatio
+            or Pid.O2Sensor3EquivalenceRatio
+            or Pid.O2Sensor4EquivalenceRatio
+            or Pid.O2Sensor5EquivalenceRatio
+            or Pid.O2Sensor6EquivalenceRatio
+            or Pid.O2Sensor7EquivalenceRatio
+            or Pid.O2Sensor8EquivalenceRatio
+            or Pid.O2Sensor1Current
+            or Pid.O2Sensor2Current
+            or Pid.O2Sensor3Current
+            or Pid.O2Sensor4Current
+            or Pid.O2Sensor5Current
+            or Pid.O2Sensor6Current
+            or Pid.O2Sensor7Current
+            or Pid.O2Sensor8Current
+            or Pid.Odometer
+            or Pid.TransmissionActualGear => 4,
+
+        Pid.NoxReagentLevel => 10,
+
+        Pid.DieselExhaustFluidLevel
+            or Pid.DieselExhaustFluidDosing => 4,
 
         _ => 1,
     };

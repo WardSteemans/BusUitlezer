@@ -63,7 +63,7 @@ public sealed class PidValue
                     : (null, null);
 
             case Pid.ThrottlePosition:
-            case Pid.RelativeThrottlePosition:
+            case Pid.RelativeAcceleratorPedalPosition:
             case Pid.EgrCommanded:
                 return rawValue.Count > 0
                     ? (rawValue[0] * 100.0 / 255.0, "%")
@@ -110,6 +110,182 @@ public sealed class PidValue
             case Pid.ActualEngineTorque:
                 return rawValue.Count > 0
                     ? (rawValue[0] - 125.0, "%")
+                    : (null, null);
+
+            case Pid.NoxReagentLevel:
+                return rawValue.Count >= 10
+                    ? (rawValue[5] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.DieselExhaustFluidLevel:
+                return rawValue.Count >= 4
+                    ? (rawValue[3] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.DieselExhaustFluidDosing:
+                return rawValue.Count >= 4
+                    ? (rawValue[1] / 2.0, "%")
+                    : (null, null);
+
+            case Pid.FuelPressure:
+                return rawValue.Count > 0
+                    ? (rawValue[0] * 3.0, "kPa")
+                    : (null, null);
+
+            case Pid.IntakeManifoldPressure:
+            case Pid.BarometricPressure:
+                return rawValue.Count > 0
+                    ? ((double)rawValue[0], "kPa")
+                    : (null, null);
+
+            case Pid.FuelRailPressure:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) * 0.079, "kPa")
+                    : (null, null);
+
+            case Pid.FuelRailGaugePressure:
+            case Pid.FuelRailAbsolutePressure:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) * 10.0, "kPa")
+                    : (null, null);
+
+            case Pid.CylinderFuelRate:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 32.0, "mg/stroke")
+                    : (null, null);
+
+            case Pid.MaxMafRate:
+                return rawValue.Count >= 4
+                    ? (rawValue[0] * 10.0, "g/s")
+                    : (null, null);
+
+            case Pid.FuelInjectionTiming:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 128.0 - 210.0, "°")
+                    : (null, null);
+
+            case Pid.CommandedEvapPurge:
+                return rawValue.Count > 0
+                    ? (rawValue[0] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.EvapSystemVaporPressure:
+                return rawValue.Count >= 2
+                    ? ((short)((rawValue[0] << 8) | rawValue[1]) / 4.0, "Pa")
+                    : (null, null);
+
+            case Pid.AbsoluteEvapSystemVaporPressure:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 200.0, "kPa")
+                    : (null, null);
+
+            case Pid.EvapSystemVaporPressureRaw:
+                return rawValue.Count >= 2
+                    ? ((double)(short)((rawValue[0] << 8) | rawValue[1]), "Pa")
+                    : (null, null);
+
+            case Pid.O2Sensor3Voltage:
+            case Pid.O2Sensor4Voltage:
+            case Pid.O2Sensor5Voltage:
+            case Pid.O2Sensor6Voltage:
+            case Pid.O2Sensor7Voltage:
+            case Pid.O2Sensor8Voltage:
+                return rawValue.Count >= 2
+                    ? (rawValue[0] * 0.005, "V")
+                    : (null, null);
+
+            case Pid.O2Sensor1EquivalenceRatio:
+            case Pid.O2Sensor2EquivalenceRatio:
+            case Pid.O2Sensor3EquivalenceRatio:
+            case Pid.O2Sensor4EquivalenceRatio:
+            case Pid.O2Sensor5EquivalenceRatio:
+            case Pid.O2Sensor6EquivalenceRatio:
+            case Pid.O2Sensor7EquivalenceRatio:
+            case Pid.O2Sensor8EquivalenceRatio:
+                return rawValue.Count >= 4
+                    ? (((rawValue[0] << 8) | rawValue[1]) * 2.0 / 65536.0, "λ")
+                    : (null, null);
+
+            case Pid.O2Sensor1Current:
+            case Pid.O2Sensor2Current:
+            case Pid.O2Sensor3Current:
+            case Pid.O2Sensor4Current:
+            case Pid.O2Sensor5Current:
+            case Pid.O2Sensor6Current:
+            case Pid.O2Sensor7Current:
+            case Pid.O2Sensor8Current:
+                return rawValue.Count >= 4
+                    ? (((rawValue[2] << 8) | rawValue[3]) / 256.0 - 128.0, "mA")
+                    : (null, null);
+
+            case Pid.SecondaryO2TrimShortBank1:
+            case Pid.SecondaryO2TrimLongBank1:
+            case Pid.SecondaryO2TrimShortBank2:
+            case Pid.SecondaryO2TrimLongBank2:
+                return rawValue.Count >= 2
+                    ? (rawValue[0] * 100.0 / 128.0 - 100.0, "%")
+                    : (null, null);
+
+            case Pid.OxygenSensorsPresent4Banks:
+                return rawValue.Count > 0
+                    ? ((double)rawValue[0], null)
+                    : (null, null);
+
+            case Pid.CatalystTempBank1Sensor1:
+            case Pid.CatalystTempBank2Sensor1:
+            case Pid.CatalystTempBank1Sensor2:
+            case Pid.CatalystTempBank2Sensor2:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 10.0 - 40.0, "°C")
+                    : (null, null);
+
+            case Pid.ThrottlePositionRelative:
+            case Pid.AbsoluteThrottlePositionB:
+            case Pid.AbsoluteThrottlePositionC:
+            case Pid.AcceleratorPedalPositionD:
+            case Pid.AcceleratorPedalPositionE:
+            case Pid.AcceleratorPedalPositionF:
+            case Pid.CommandedThrottleActuator:
+            case Pid.HybridBatteryPackRemainingLife:
+                return rawValue.Count > 0
+                    ? (rawValue[0] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.EngineReferenceTorque:
+                return rawValue.Count >= 2
+                    ? ((double)((rawValue[0] << 8) | rawValue[1]), "N·m")
+                    : (null, null);
+
+            case Pid.EngineFrictionPercentTorque:
+                return rawValue.Count > 0
+                    ? (rawValue[0] - 125.0, "%")
+                    : (null, null);
+
+            case Pid.RuntimeSinceEngineStart:
+                return rawValue.Count >= 2
+                    ? ((double)((rawValue[0] << 8) | rawValue[1]), "s")
+                    : (null, null);
+
+            case Pid.DistanceWithMilOn:
+            case Pid.DistanceSinceCodesCleared:
+                return rawValue.Count >= 2
+                    ? ((double)((rawValue[0] << 8) | rawValue[1]), "km")
+                    : (null, null);
+
+            case Pid.WarmUpsSinceCodesCleared:
+            case Pid.AuxiliaryInputStatus:
+                return rawValue.Count > 0
+                    ? ((double)rawValue[0], null)
+                    : (null, null);
+
+            case Pid.Odometer:
+                return rawValue.Count >= 4
+                    ? ((((uint)rawValue[0] << 24) | ((uint)rawValue[1] << 16) | ((uint)rawValue[2] << 8) | rawValue[3]) / 10.0, "km")
+                    : (null, null);
+
+            case Pid.TransmissionActualGear:
+                return rawValue.Count >= 4
+                    ? (((rawValue[2] << 8) | rawValue[3]) / 1000.0, "ratio")
                     : (null, null);
 
             default:

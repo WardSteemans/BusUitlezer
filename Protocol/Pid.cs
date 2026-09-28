@@ -54,8 +54,11 @@ public enum Pid : byte
     RuntimeWithMilOn = 0x4D,
     /// <summary>Time since diagnostic trouble codes were cleared (minutes).</summary>
     RuntimeSinceCodesCleared = 0x4E,
-    /// <summary>Relative throttle position (0-100 %).</summary>
-    RelativeThrottlePosition = 0x5A,
+    /// <summary>Relative accelerator pedal position (0-100 %) — what the driver is
+    /// requesting, as distinct from <see cref="ThrottlePositionRelative"/> (0x45), the actual
+    /// throttle plate angle; these diverge under cruise control, traction control, or ECU
+    /// torque intervention.</summary>
+    RelativeAcceleratorPedalPosition = 0x5A,
     /// <summary>Engine oil temperature (-40 to +215 degC).</summary>
     EngineOilTemp = 0x5C,
     /// <summary>Engine fuel rate (0-3276.75 L/h).</summary>
@@ -64,4 +67,161 @@ public enum Pid : byte
     DriverDemandEngineTorque = 0x61,
     /// <summary>Actual engine torque (-125 to +130 %).</summary>
     ActualEngineTorque = 0x62,
+    /// <summary>NOx reagent/SCR system — reagent level (0-100 %), decoded from byte offset 5
+    /// of a 10-byte response; the other 9 bytes are undocumented.</summary>
+    NoxReagentLevel = 0x85,
+    /// <summary>Diesel exhaust fluid (DEF) sensor — level (0-100 %), decoded from byte offset 3
+    /// of a 4-byte response; the other 3 bytes are undocumented.</summary>
+    DieselExhaustFluidLevel = 0x9B,
+    /// <summary>Commanded diesel exhaust fluid dosing rate (0-127.5 %), decoded from byte
+    /// offset 1 of a 4-byte response; the other 3 bytes are undocumented.</summary>
+    DieselExhaustFluidDosing = 0xA5,
+    /// <summary>Fuel pressure, gauge (0-765 kPa).</summary>
+    FuelPressure = 0x0A,
+    /// <summary>Intake manifold absolute pressure (0-255 kPa).</summary>
+    IntakeManifoldPressure = 0x0B,
+    /// <summary>Fuel rail pressure, relative to manifold vacuum (0-5177.265 kPa).</summary>
+    FuelRailPressure = 0x22,
+    /// <summary>Fuel rail gauge pressure — diesel or gasoline direct injection
+    /// (0-655,350 kPa).</summary>
+    FuelRailGaugePressure = 0x23,
+    /// <summary>Fuel rail absolute pressure (0-655,350 kPa).</summary>
+    FuelRailAbsolutePressure = 0x59,
+    /// <summary>Cylinder fuel rate (0-2047.96875 mg/stroke).</summary>
+    CylinderFuelRate = 0xA2,
+    /// <summary>Maximum value for air flow rate from mass air flow sensor (0-2550 g/s);
+    /// bytes B-D are reserved for future use and not decoded.</summary>
+    MaxMafRate = 0x50,
+    /// <summary>Fuel injection timing (-210.00 to +301.992 deg).</summary>
+    FuelInjectionTiming = 0x5D,
+    /// <summary>Absolute barometric pressure (0-255 kPa).</summary>
+    BarometricPressure = 0x33,
+    /// <summary>Commanded evaporative purge (0-100 %).</summary>
+    CommandedEvapPurge = 0x2E,
+    /// <summary>Evap. system vapor pressure, two's-complement signed (-8192 to 8191.75 Pa).</summary>
+    EvapSystemVaporPressure = 0x32,
+    /// <summary>Absolute evap system vapor pressure, unsigned (0-327.675 kPa).</summary>
+    AbsoluteEvapSystemVaporPressure = 0x53,
+    /// <summary>Evap system vapor pressure, raw two's-complement signed (-32768 to 32767 Pa).</summary>
+    EvapSystemVaporPressureRaw = 0x54,
+    /// <summary>O2 sensor 3 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor3Voltage = 0x16,
+    /// <summary>O2 sensor 4 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor4Voltage = 0x17,
+    /// <summary>O2 sensor 5 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor5Voltage = 0x18,
+    /// <summary>O2 sensor 6 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor6Voltage = 0x19,
+    /// <summary>O2 sensor 7 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor7Voltage = 0x1A,
+    /// <summary>O2 sensor 8 voltage (0-1.275 V); fuel trim byte documented but not decoded.</summary>
+    O2Sensor8Voltage = 0x1B,
+    /// <summary>O2 sensor 1 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor1EquivalenceRatio = 0x24,
+    /// <summary>O2 sensor 2 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor2EquivalenceRatio = 0x25,
+    /// <summary>O2 sensor 3 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor3EquivalenceRatio = 0x26,
+    /// <summary>O2 sensor 4 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor4EquivalenceRatio = 0x27,
+    /// <summary>O2 sensor 5 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor5EquivalenceRatio = 0x28,
+    /// <summary>O2 sensor 6 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor6EquivalenceRatio = 0x29,
+    /// <summary>O2 sensor 7 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor7EquivalenceRatio = 0x2A,
+    /// <summary>O2 sensor 8 air-fuel equivalence ratio (lambda, 0 to &lt;2); voltage bytes
+    /// documented but not decoded.</summary>
+    O2Sensor8EquivalenceRatio = 0x2B,
+    /// <summary>O2 sensor 1 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor1Current = 0x34,
+    /// <summary>O2 sensor 2 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor2Current = 0x35,
+    /// <summary>O2 sensor 3 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor3Current = 0x36,
+    /// <summary>O2 sensor 4 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor4Current = 0x37,
+    /// <summary>O2 sensor 5 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor5Current = 0x38,
+    /// <summary>O2 sensor 6 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor6Current = 0x39,
+    /// <summary>O2 sensor 7 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor7Current = 0x3A,
+    /// <summary>O2 sensor 8 current (-128 to &lt;128 mA), decoded from byte offset 2-3;
+    /// equivalence-ratio bytes 0-1 documented but not decoded.</summary>
+    O2Sensor8Current = 0x3B,
+    /// <summary>Short term secondary O2 sensor trim, bank 1 (-100 to 99.2 %); bank 3 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimShortBank1 = 0x55,
+    /// <summary>Long term secondary O2 sensor trim, bank 1 (-100 to 99.2 %); bank 3 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimLongBank1 = 0x56,
+    /// <summary>Short term secondary O2 sensor trim, bank 2 (-100 to 99.2 %); bank 4 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimShortBank2 = 0x57,
+    /// <summary>Long term secondary O2 sensor trim, bank 2 (-100 to 99.2 %); bank 4 byte
+    /// documented but not decoded.</summary>
+    SecondaryO2TrimLongBank2 = 0x58,
+    /// <summary>Oxygen sensors present, 4-bank layout (bitmask, no linear formula documented).</summary>
+    OxygenSensorsPresent4Banks = 0x1D,
+    /// <summary>Catalyst temperature, bank 1, sensor 1 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank1Sensor1 = 0x3C,
+    /// <summary>Catalyst temperature, bank 2, sensor 1 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank2Sensor1 = 0x3D,
+    /// <summary>Catalyst temperature, bank 1, sensor 2 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank1Sensor2 = 0x3E,
+    /// <summary>Catalyst temperature, bank 2, sensor 2 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank2Sensor2 = 0x3F,
+    /// <summary>Relative throttle position (0-100 %) — the actual throttle plate angle, as
+    /// distinct from <see cref="RelativeAcceleratorPedalPosition"/> (0x5A).</summary>
+    ThrottlePositionRelative = 0x45,
+    /// <summary>Absolute throttle position B (0-100 %).</summary>
+    AbsoluteThrottlePositionB = 0x47,
+    /// <summary>Absolute throttle position C (0-100 %).</summary>
+    AbsoluteThrottlePositionC = 0x48,
+    /// <summary>Accelerator pedal position D (0-100 %).</summary>
+    AcceleratorPedalPositionD = 0x49,
+    /// <summary>Accelerator pedal position E (0-100 %).</summary>
+    AcceleratorPedalPositionE = 0x4A,
+    /// <summary>Accelerator pedal position F (0-100 %).</summary>
+    AcceleratorPedalPositionF = 0x4B,
+    /// <summary>Commanded throttle actuator (0-100 %).</summary>
+    CommandedThrottleActuator = 0x4C,
+    /// <summary>Hybrid battery pack remaining life (0-100 %); not applicable to this
+    /// non-hybrid diesel vehicle.</summary>
+    HybridBatteryPackRemainingLife = 0x5B,
+    /// <summary>Engine reference torque (0-65,535 N·m).</summary>
+    EngineReferenceTorque = 0x63,
+    /// <summary>Engine friction - percent torque (-125 to +130 %).</summary>
+    EngineFrictionPercentTorque = 0x8E,
+    /// <summary>Run time since engine start (0-65,535 s).</summary>
+    RuntimeSinceEngineStart = 0x1F,
+    /// <summary>Distance traveled with MIL on (0-65,535 km).</summary>
+    DistanceWithMilOn = 0x21,
+    /// <summary>Distance traveled since diagnostic trouble codes were cleared (0-65,535 km).</summary>
+    DistanceSinceCodesCleared = 0x31,
+    /// <summary>Number of warm-ups since diagnostic trouble codes were cleared (0-255).</summary>
+    WarmUpsSinceCodesCleared = 0x30,
+    /// <summary>Odometer, CARB-mandated starting model year 2019 (0-429,496,729.5 km).</summary>
+    Odometer = 0xA6,
+    /// <summary>Transmission actual gear ratio, decoded from byte offset 2-3 (0-65.535 ratio);
+    /// bytes A (partial support-bit) and B are undocumented and not decoded.</summary>
+    TransmissionActualGear = 0xA4,
+    /// <summary>Auxiliary input status — bit 0 is Power Take Off (PTO) status, raw byte
+    /// passthrough (no linear formula documented).</summary>
+    AuxiliaryInputStatus = 0x1E,
 }

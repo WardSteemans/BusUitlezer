@@ -60,4 +60,15 @@ public class PidValueTests
         Assert.Null(value.InterpretedValue);
         Assert.Null(value.Unit);
     }
+
+    [Fact]
+    public void Odometer_NearMaxByteRange_UsesUnsignedWideArithmeticWithoutOverflow()
+    {
+        // raw = 0xFF 0xFF 0xFF 0xFF = 4294967295 -> /10 = 429496729.5 km.
+        // A signed 32-bit int combine would overflow and produce a negative value here.
+        var value = new PidValue(Pid.Odometer, [0xFF, 0xFF, 0xFF, 0xFF]);
+
+        Assert.Equal(429496729.5, value.InterpretedValue);
+        Assert.Equal("km", value.Unit);
+    }
 }
