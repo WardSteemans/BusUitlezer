@@ -1,0 +1,115 @@
+using TransitObd.Protocol;
+using Xunit;
+
+namespace TransitObd.Tests;
+
+public class FakeObdLinkTests
+{
+    [Fact]
+    public void RawValues_HasAnExplicitEntryForEveryPid()
+    {
+        foreach (Pid pid in Enum.GetValues<Pid>())
+        {
+            Assert.True(FakeObdLink.HasCannedValue(pid), $"No canned value for {pid} — would silently zero-fill.");
+        }
+    }
+
+    // Expected values are written as the exact same expression as PidValue's formula for
+    // that PID (e.g. raw * 100.0 / 255.0), not hand-typed decimals: since both sides
+    // evaluate identical IEEE-754 double arithmetic, equality is exact, with no rounding
+    // tolerance needed even for non-terminating fractions like x/255.
+    [Theory]
+    [InlineData(Pid.EngineLoad, 89 * 100.0 / 255.0, "%")]                 // raw 0x59
+    [InlineData(Pid.CoolantTemp, 129.0 - 40.0, "°C")]                     // raw 0x81
+    [InlineData(Pid.ShortFuelTrimBank1, (131.0 - 128.0) * 100.0 / 128.0, "%")] // raw 0x83
+    [InlineData(Pid.LongFuelTrimBank1, (127.0 - 128.0) * 100.0 / 128.0, "%")]  // raw 0x7F
+    [InlineData(Pid.ShortFuelTrimBank2, (130.0 - 128.0) * 100.0 / 128.0, "%")] // raw 0x82
+    [InlineData(Pid.LongFuelTrimBank2, (125.0 - 128.0) * 100.0 / 128.0, "%")]  // raw 0x7D
+    [InlineData(Pid.EngineRpm, 8600.0 / 4.0, "rpm")]                      // raw 0x21,0x98
+    [InlineData(Pid.VehicleSpeed, 62.0, "km/h")]                          // raw 0x3E
+    [InlineData(Pid.TimingAdvance, 148.0 / 2.0 - 64.0, "°")]              // raw 0x94
+    [InlineData(Pid.IntakeAirTemp, 64.0 - 40.0, "°C")]                    // raw 0x40
+    [InlineData(Pid.MafRate, 1250.0 / 100.0, "g/s")]                      // raw 0x04,0xE2
+    [InlineData(Pid.ThrottlePosition, 46 * 100.0 / 255.0, "%")]           // raw 0x2E
+    [InlineData(Pid.OxygenSensorsPresent, 3.0, null)]                     // raw 0x03
+    [InlineData(Pid.O2Bank1Sensor1Voltage, 90 * 0.005, "V")]              // raw 0x5A,0x80
+    [InlineData(Pid.O2Bank1Sensor2Voltage, 124 * 0.005, "V")]             // raw 0x7C,0x80
+    [InlineData(Pid.EgrCommanded, 51 * 100.0 / 255.0, "%")]               // raw 0x33
+    [InlineData(Pid.EgrError, (124.0 - 128.0) * 100.0 / 128.0, "%")]      // raw 0x7C
+    [InlineData(Pid.FuelTankLevel, 140 * 100.0 / 255.0, "%")]             // raw 0x8C
+    [InlineData(Pid.ControlModuleVoltage, 13800.0 / 1000.0, "V")]         // raw 0x35,0xE8
+    [InlineData(Pid.FuelAirEquivalenceRatio, 32768.0 * 2.0 / 65536.0, "λ")] // raw 0x80,0x00,0x00,0x00
+    [InlineData(Pid.AmbientAirTemp, 58.0 - 40.0, "°C")]                   // raw 0x3A
+    [InlineData(Pid.RuntimeWithMilOn, 12.0, "min")]                       // raw 0x00,0x0C
+    [InlineData(Pid.RuntimeSinceCodesCleared, 340.0, "min")]              // raw 0x01,0x54
+    [InlineData(Pid.RelativeThrottlePosition, 13 * 100.0 / 255.0, "%")]   // raw 0x0D
+    [InlineData(Pid.EngineOilTemp, 135.0 - 40.0, "°C")]                   // raw 0x87
+    [InlineData(Pid.EngineFuelRate, 64.0 * 0.05, "L/h")]                  // raw 0x00,0x40
+    [InlineData(Pid.DriverDemandEngineTorque, 115.0 - 125.0, "%")]        // raw 0x73
+    [InlineData(Pid.ActualEngineTorque, 117.0 - 125.0, "%")]              // raw 0x75
+    public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
+        Pid pid, double expectedValue, string? expectedUnit)
+    {
+        var client = new J1979Client(new FakeObdLink());
+
+        var values = await client.ReadLiveDataAsync([pid]);
+
+        var value = Assert.Single(values);
+        Assert.Equal(expectedValue, value.InterpretedValue!.Value);
+        Assert.Equal(expectedUnit, value.Unit);
+    }
+
+    [Fact]
+    public async Task SendRequestAsync_Mode04_ReturnsSuccessByte()
+    {
+        var link = new FakeObdLink();
+
+        byte[] response = await link.SendRequestAsync([0x04]);
+
+        Assert.Equal([0x44], response);
+    }
+
+    [Fact]
+    public async Task SendRequestAsync_Mode07_ReturnsZeroDtcs()
+    {
+        var link = new FakeObdLink();
+
+        byte[] response = await link.SendRequestAsync([0x07]);
+
+        Assert.Equal([0x47, 0x00], response);
+    }
+
+    [Fact]
+    public async Task SendRequestAsync_Mode0A_ReturnsZeroDtcs()
+    {
+        var link = new FakeObdLink();
+
+        byte[] response = await link.SendRequestAsync([0x0A]);
+
+        Assert.Equal([0x4A, 0x00], response);
+    }
+
+    [Fact]
+    public async Task SendRequestAsync_UnsupportedMode_Throws()
+    {
+        var link = new FakeObdLink();
+
+        await Assert.ThrowsAsync<NotSupportedException>(() => link.SendRequestAsync([0x02]));
+    }
+
+    [Fact]
+    public async Task SendRequestAsync_Mode09WrongPid_Throws()
+    {
+        var link = new FakeObdLink();
+
+        await Assert.ThrowsAsync<NotSupportedException>(() => link.SendRequestAsync([0x09, 0x01]));
+    }
+
+    [Fact]
+    public async Task SendRequestAsync_EmptyRequest_Throws()
+    {
+        var link = new FakeObdLink();
+
+        await Assert.ThrowsAsync<ArgumentException>(() => link.SendRequestAsync([]));
+    }
+}

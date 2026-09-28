@@ -15,4 +15,8 @@
     <Compile Remove="TransitObd.Tests/**/*.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="TransitObd.Tests" />
+  </ItemGroup>
+
 </Project>
