@@ -31,7 +31,16 @@ public static class PidCatalog
             or Pid.IntakeManifoldPressure
             or Pid.BarometricPressure
             or Pid.CommandedEvapPurge
-            or Pid.OxygenSensorsPresent4Banks => 1,
+            or Pid.OxygenSensorsPresent4Banks
+            or Pid.ThrottlePositionRelative
+            or Pid.AbsoluteThrottlePositionB
+            or Pid.AbsoluteThrottlePositionC
+            or Pid.AcceleratorPedalPositionD
+            or Pid.AcceleratorPedalPositionE
+            or Pid.AcceleratorPedalPositionF
+            or Pid.CommandedThrottleActuator
+            or Pid.HybridBatteryPackRemainingLife
+            or Pid.EngineFrictionPercentTorque => 1,
 
         Pid.EngineRpm
             or Pid.MafRate
@@ -62,7 +71,8 @@ public static class PidCatalog
             or Pid.CatalystTempBank1Sensor1
             or Pid.CatalystTempBank2Sensor1
             or Pid.CatalystTempBank1Sensor2
-            or Pid.CatalystTempBank2Sensor2 => 2,
+            or Pid.CatalystTempBank2Sensor2
+            or Pid.EngineReferenceTorque => 2,
 
         Pid.FuelAirEquivalenceRatio
             or Pid.MaxMafRate

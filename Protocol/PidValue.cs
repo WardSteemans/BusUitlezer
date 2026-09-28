@@ -239,6 +239,28 @@ public sealed class PidValue
                     ? (((rawValue[0] << 8) | rawValue[1]) / 10.0 - 40.0, "°C")
                     : (null, null);
 
+            case Pid.ThrottlePositionRelative:
+            case Pid.AbsoluteThrottlePositionB:
+            case Pid.AbsoluteThrottlePositionC:
+            case Pid.AcceleratorPedalPositionD:
+            case Pid.AcceleratorPedalPositionE:
+            case Pid.AcceleratorPedalPositionF:
+            case Pid.CommandedThrottleActuator:
+            case Pid.HybridBatteryPackRemainingLife:
+                return rawValue.Count > 0
+                    ? (rawValue[0] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.EngineReferenceTorque:
+                return rawValue.Count >= 2
+                    ? ((double)((rawValue[0] << 8) | rawValue[1]), "N·m")
+                    : (null, null);
+
+            case Pid.EngineFrictionPercentTorque:
+                return rawValue.Count > 0
+                    ? (rawValue[0] - 125.0, "%")
+                    : (null, null);
+
             default:
                 return (null, null);
         }

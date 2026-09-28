@@ -94,6 +94,16 @@ public class FakeObdLinkTests
     [InlineData(Pid.CatalystTempBank2Sensor1, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
     [InlineData(Pid.CatalystTempBank1Sensor2, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
     [InlineData(Pid.CatalystTempBank2Sensor2, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
+    [InlineData(Pid.ThrottlePositionRelative, 51 * 100.0 / 255.0, "%")]   // raw 0x33
+    [InlineData(Pid.AbsoluteThrottlePositionB, 102 * 100.0 / 255.0, "%")] // raw 0x66
+    [InlineData(Pid.AbsoluteThrottlePositionC, 153 * 100.0 / 255.0, "%")] // raw 0x99
+    [InlineData(Pid.AcceleratorPedalPositionD, 204 * 100.0 / 255.0, "%")] // raw 0xCC
+    [InlineData(Pid.AcceleratorPedalPositionE, 255 * 100.0 / 255.0, "%")] // raw 0xFF
+    [InlineData(Pid.AcceleratorPedalPositionF, 0 * 100.0 / 255.0, "%")]   // raw 0x00
+    [InlineData(Pid.CommandedThrottleActuator, 102 * 100.0 / 255.0, "%")] // raw 0x66
+    [InlineData(Pid.HybridBatteryPackRemainingLife, 153 * 100.0 / 255.0, "%")] // raw 0x99
+    [InlineData(Pid.EngineReferenceTorque, 350.0, "N·m")]                 // raw 0x01,0x5E
+    [InlineData(Pid.EngineFrictionPercentTorque, 120.0 - 125.0, "%")]     // raw 0x78
     public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
         Pid pid, double expectedValue, string? expectedUnit)
     {

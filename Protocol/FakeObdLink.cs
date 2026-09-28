@@ -84,6 +84,16 @@ public sealed class FakeObdLink : IObdLink
         [Pid.CatalystTempBank2Sensor1] = [0x17, 0x70],    // 560.0 degC
         [Pid.CatalystTempBank1Sensor2] = [0x17, 0x70],    // 560.0 degC
         [Pid.CatalystTempBank2Sensor2] = [0x17, 0x70],    // 560.0 degC
+        [Pid.ThrottlePositionRelative] = [0x33],           // 20.0 %
+        [Pid.AbsoluteThrottlePositionB] = [0x66],          // 40.0 %
+        [Pid.AbsoluteThrottlePositionC] = [0x99],          // 60.0 %
+        [Pid.AcceleratorPedalPositionD] = [0xCC],          // 80.0 %
+        [Pid.AcceleratorPedalPositionE] = [0xFF],          // 100.0 %
+        [Pid.AcceleratorPedalPositionF] = [0x00],          // 0.0 %
+        [Pid.CommandedThrottleActuator] = [0x66],          // 40.0 %
+        [Pid.HybridBatteryPackRemainingLife] = [0x99],     // 60.0 %
+        [Pid.EngineReferenceTorque] = [0x01, 0x5E],       // 350.0 N·m
+        [Pid.EngineFrictionPercentTorque] = [0x78],        // -5.0 %
     };
 
     /// <summary>True if <paramref name="pid"/> has an explicit canned value (as opposed to

@@ -183,4 +183,27 @@ public enum Pid : byte
     CatalystTempBank1Sensor2 = 0x3E,
     /// <summary>Catalyst temperature, bank 2, sensor 2 (-40 to 6513.5 degC).</summary>
     CatalystTempBank2Sensor2 = 0x3F,
+    /// <summary>Relative throttle position (0-100 %). The genuine PID for this name; distinct
+    /// from the existing, currently mislabeled <see cref="RelativeThrottlePosition"/>
+    /// (0x5A), which actually returns relative accelerator pedal position.</summary>
+    ThrottlePositionRelative = 0x45,
+    /// <summary>Absolute throttle position B (0-100 %).</summary>
+    AbsoluteThrottlePositionB = 0x47,
+    /// <summary>Absolute throttle position C (0-100 %).</summary>
+    AbsoluteThrottlePositionC = 0x48,
+    /// <summary>Accelerator pedal position D (0-100 %).</summary>
+    AcceleratorPedalPositionD = 0x49,
+    /// <summary>Accelerator pedal position E (0-100 %).</summary>
+    AcceleratorPedalPositionE = 0x4A,
+    /// <summary>Accelerator pedal position F (0-100 %).</summary>
+    AcceleratorPedalPositionF = 0x4B,
+    /// <summary>Commanded throttle actuator (0-100 %).</summary>
+    CommandedThrottleActuator = 0x4C,
+    /// <summary>Hybrid battery pack remaining life (0-100 %); not applicable to this
+    /// non-hybrid diesel vehicle.</summary>
+    HybridBatteryPackRemainingLife = 0x5B,
+    /// <summary>Engine reference torque (0-65,535 N·m).</summary>
+    EngineReferenceTorque = 0x63,
+    /// <summary>Engine friction - percent torque (-125 to +130 %).</summary>
+    EngineFrictionPercentTorque = 0x8E,
 }
