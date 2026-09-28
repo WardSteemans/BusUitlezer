@@ -112,6 +112,21 @@ public sealed class PidValue
                     ? (rawValue[0] - 125.0, "%")
                     : (null, null);
 
+            case Pid.NoxReagentLevel:
+                return rawValue.Count >= 10
+                    ? (rawValue[5] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.DieselExhaustFluidLevel:
+                return rawValue.Count >= 4
+                    ? (rawValue[3] * 100.0 / 255.0, "%")
+                    : (null, null);
+
+            case Pid.DieselExhaustFluidDosing:
+                return rawValue.Count >= 4
+                    ? (rawValue[1] / 2.0, "%")
+                    : (null, null);
+
             default:
                 return (null, null);
         }

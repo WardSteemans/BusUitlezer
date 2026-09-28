@@ -37,6 +37,9 @@ public sealed class FakeObdLink : IObdLink
         [Pid.EngineFuelRate] = [0x00, 0x40],             // 3.2 L/h
         [Pid.DriverDemandEngineTorque] = [0x73],          // -10 %
         [Pid.ActualEngineTorque] = [0x75],                // -8 %
+        [Pid.NoxReagentLevel] = [0x00, 0x00, 0x00, 0x00, 0x00, 0xCC, 0x00, 0x00, 0x00, 0x00], // 80.0 %
+        [Pid.DieselExhaustFluidLevel] = [0x00, 0x00, 0x00, 0x99], // 60.0 %
+        [Pid.DieselExhaustFluidDosing] = [0x01, 0x28, 0x00, 0x00], // 20.0 %
     };
 
     /// <summary>True if <paramref name="pid"/> has an explicit canned value (as opposed to

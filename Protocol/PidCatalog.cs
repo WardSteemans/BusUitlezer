@@ -39,6 +39,11 @@ public static class PidCatalog
 
         Pid.FuelAirEquivalenceRatio => 4,
 
+        Pid.NoxReagentLevel => 10,
+
+        Pid.DieselExhaustFluidLevel
+            or Pid.DieselExhaustFluidDosing => 4,
+
         _ => 1,
     };
 }

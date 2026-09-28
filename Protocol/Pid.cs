@@ -64,4 +64,13 @@ public enum Pid : byte
     DriverDemandEngineTorque = 0x61,
     /// <summary>Actual engine torque (-125 to +130 %).</summary>
     ActualEngineTorque = 0x62,
+    /// <summary>NOx reagent/SCR system — reagent level (0-100 %), decoded from byte offset 5
+    /// of a 10-byte response; the other 9 bytes are undocumented.</summary>
+    NoxReagentLevel = 0x85,
+    /// <summary>Diesel exhaust fluid (DEF) sensor — level (0-100 %), decoded from byte offset 3
+    /// of a 4-byte response; the other 3 bytes are undocumented.</summary>
+    DieselExhaustFluidLevel = 0x9B,
+    /// <summary>Commanded diesel exhaust fluid dosing rate (0-127.5 %), decoded from byte
+    /// offset 1 of a 4-byte response; the other 3 bytes are undocumented.</summary>
+    DieselExhaustFluidDosing = 0xA5,
 }
