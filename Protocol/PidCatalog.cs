@@ -58,7 +58,11 @@ public static class PidCatalog
             or Pid.SecondaryO2TrimShortBank1
             or Pid.SecondaryO2TrimLongBank1
             or Pid.SecondaryO2TrimShortBank2
-            or Pid.SecondaryO2TrimLongBank2 => 2,
+            or Pid.SecondaryO2TrimLongBank2
+            or Pid.CatalystTempBank1Sensor1
+            or Pid.CatalystTempBank2Sensor1
+            or Pid.CatalystTempBank1Sensor2
+            or Pid.CatalystTempBank2Sensor2 => 2,
 
         Pid.FuelAirEquivalenceRatio
             or Pid.MaxMafRate

@@ -80,6 +80,10 @@ public sealed class FakeObdLink : IObdLink
         [Pid.SecondaryO2TrimShortBank2] = [0x60, 0x00],   // -25.0 %
         [Pid.SecondaryO2TrimLongBank2] = [0x60, 0x00],    // -25.0 %
         [Pid.OxygenSensorsPresent4Banks] = [0x0F],         // 15.0 (raw bitmask)
+        [Pid.CatalystTempBank1Sensor1] = [0x17, 0x70],    // 560.0 degC
+        [Pid.CatalystTempBank2Sensor1] = [0x17, 0x70],    // 560.0 degC
+        [Pid.CatalystTempBank1Sensor2] = [0x17, 0x70],    // 560.0 degC
+        [Pid.CatalystTempBank2Sensor2] = [0x17, 0x70],    // 560.0 degC
     };
 
     /// <summary>True if <paramref name="pid"/> has an explicit canned value (as opposed to

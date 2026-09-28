@@ -90,6 +90,10 @@ public class FakeObdLinkTests
     [InlineData(Pid.SecondaryO2TrimShortBank2, 96 * 100.0 / 128.0 - 100.0, "%")] // raw 0x60,0x00
     [InlineData(Pid.SecondaryO2TrimLongBank2, 96 * 100.0 / 128.0 - 100.0, "%")]  // raw 0x60,0x00
     [InlineData(Pid.OxygenSensorsPresent4Banks, 15.0, null)]              // raw 0x0F
+    [InlineData(Pid.CatalystTempBank1Sensor1, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
+    [InlineData(Pid.CatalystTempBank2Sensor1, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
+    [InlineData(Pid.CatalystTempBank1Sensor2, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
+    [InlineData(Pid.CatalystTempBank2Sensor2, 6000.0 / 10.0 - 40.0, "°C")] // raw 0x17,0x70
     public async Task ReadLiveDataAsync_EveryPid_ReturnsExpectedInterpretedValue(
         Pid pid, double expectedValue, string? expectedUnit)
     {

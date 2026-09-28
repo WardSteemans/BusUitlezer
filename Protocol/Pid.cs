@@ -175,4 +175,12 @@ public enum Pid : byte
     SecondaryO2TrimLongBank2 = 0x58,
     /// <summary>Oxygen sensors present, 4-bank layout (bitmask, no linear formula documented).</summary>
     OxygenSensorsPresent4Banks = 0x1D,
+    /// <summary>Catalyst temperature, bank 1, sensor 1 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank1Sensor1 = 0x3C,
+    /// <summary>Catalyst temperature, bank 2, sensor 1 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank2Sensor1 = 0x3D,
+    /// <summary>Catalyst temperature, bank 1, sensor 2 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank1Sensor2 = 0x3E,
+    /// <summary>Catalyst temperature, bank 2, sensor 2 (-40 to 6513.5 degC).</summary>
+    CatalystTempBank2Sensor2 = 0x3F,
 }

@@ -231,6 +231,14 @@ public sealed class PidValue
                     ? ((double)rawValue[0], null)
                     : (null, null);
 
+            case Pid.CatalystTempBank1Sensor1:
+            case Pid.CatalystTempBank2Sensor1:
+            case Pid.CatalystTempBank1Sensor2:
+            case Pid.CatalystTempBank2Sensor2:
+                return rawValue.Count >= 2
+                    ? (((rawValue[0] << 8) | rawValue[1]) / 10.0 - 40.0, "°C")
+                    : (null, null);
+
             default:
                 return (null, null);
         }
